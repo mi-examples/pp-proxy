@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "incremental": true,
+    "target": "es2020",
+    "lib": [
+      "es2020"
+    ],
+    "noImplicitOverride": true,
+    "module": "node16",
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "moduleResolution": "node16",
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "ts-node": {
+    "transpileOnly": true,
+    "files": true,
+    "experimentalResolver": true
+  },
+  "exclude": [
+    "node_modules",
+  ]
+}

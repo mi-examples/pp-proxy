@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "src"
+  ],
+  "delay": 5,
+  "ext": "ts",
+  "exec": "ts-node-esm ./src/main.ts"
+}
