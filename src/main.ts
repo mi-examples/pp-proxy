@@ -21,6 +21,11 @@ const localPort = Number.isNaN(Number(LOCAL_HOST_PORT))
 const target = `${scheme}://${host}`;
 const localHost = `http://localhost:${localPort}`;
 
+const authLoginRegExp = new RegExp(
+  `(\\\\)?/auth(\\\\)?/saml(\\\\)?/login`,
+  "gi"
+);
+
 const replaceRegExp = new RegExp(`${scheme}:(\\\\)?/(\\\\)?/${host}`, "gi");
 
 app.use(
@@ -59,7 +64,9 @@ app.use(
         } else {
           const response = responseBuffer.toString("utf8"); // convert buffer to string
 
-          return response.replace(replaceRegExp, localHost); // manipulate response and return the result
+          return response
+            .replace(replaceRegExp, localHost)
+            .replace(authLoginRegExp, "/login"); // manipulate response and return the result
         }
       }
     ),
