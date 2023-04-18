@@ -43,8 +43,11 @@ app.use(
       host,
       origin: target,
     },
+    proxyTimeout: 5 * 60 * 1000,
     onProxyReq(proxyReq, req) {
       const referer = proxyReq.getHeader("referer");
+
+      console.log(`Proxies request: ${req.method} ${referer || ''}${req.url} -> ${proxyReq.method} ${proxyReq.protocol}//${proxyReq.host}${proxyReq.path}`);
 
       if (referer) {
         proxyReq.setHeader(
@@ -52,6 +55,14 @@ app.use(
           (referer as string).replace(localHost, target)
         );
       }
+
+      req.socket.on('close', () => {
+        setTimeout(() => {
+          if (!proxyReq.destroyed) {
+            proxyReq.destroy();
+          }
+        }, 200);
+      });
 
       return proxyReq;
     },
@@ -76,5 +87,7 @@ app.use(
 app.listen(localPort, () => {
   console.log(`Try to open ${localHost} in the browser`);
 
-  open(localHost);
+  open(localHost).catch(() => {
+    //
+  });
 });
