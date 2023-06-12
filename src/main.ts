@@ -39,6 +39,7 @@ app.use(
     target,
     changeOrigin: true,
     autoRewrite: true,
+    secure: false,
     headers: {
       host,
       origin: target,
