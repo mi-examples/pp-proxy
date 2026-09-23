@@ -3,3 +3,8 @@ dist
 node_modules
 .env
 !.env.example
+
+# Secrets — never commit (SEC-8587)
+.env.*
+*.pem
+!.env.example
